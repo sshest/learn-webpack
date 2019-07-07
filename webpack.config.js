@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var HtmlPlugin = require('html-webpack-plugin');
 
 const VENDOR_LIBS = ['faker', 'lodash', 'react', 'redux', 'react-redux', 'react-dom', 'react-input-range', 'redux-form', 'redux-thunk'];
 
@@ -9,7 +10,7 @@ module.exports = {
     vendor: VENDOR_LIBS
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'build'),
     filename: '[name].js'
   },
   module: {
@@ -23,7 +24,14 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
         test: /\.css$/
       }
-
-    ]
-  }
+    ],
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
+    }),
+      new HtmlPlugin({
+        template: 'src/index.html'
+      })
+  ]
 };
