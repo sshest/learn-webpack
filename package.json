@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf build",
-    "build": "NODE_ENV=production npm run clean && webpack -p",
-    "serve": "webpack-dev-server"
+    "build": "cross-env NODE_ENV=production npm run clean && webpack -p",
+    "serve": "webpack-dev-server",
+    "deploy": "npm run build && git subtree push --prefix build deploy gh-pages"
   },
   "repository": "https://github.com/StephenGrider/WebpackProject",
   "author": "",
@@ -28,6 +29,7 @@
     "babel-loader": "^6.2.0",
     "babel-preset-env": "^1.1.4",
     "babel-preset-react": "^6.16.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.26.1",
     "html-webpack-plugin": "^3.2.0",
     "rimraf": "^2.6.3",
